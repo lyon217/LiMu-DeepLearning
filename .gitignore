@@ -1,4 +1,6 @@
 .idea
-dataset
+dataset/pthfile
+!dataset/*.png
+!dataset/*.jpg
 mytools/__pycache__
 
