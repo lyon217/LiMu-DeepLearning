@@ -2,7 +2,7 @@ import time
 import numpy as np
 
 
-class Timer():
+class Timer:
     def __init__(self):
         self.times = []
         self.start()

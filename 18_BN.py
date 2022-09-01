@@ -1,8 +1,8 @@
 import torch
 from torch import nn
-from d2l import torch as d2l
+from mytools.loaddataset import myLoadDataSetFashionMnist
 import mytools
-from mytools import myLoadDataSet, Train
+from mytools import Train
 from matplotlib import pyplot as plt
 
 
@@ -92,7 +92,7 @@ net = nn.Sequential(
     , nn.Linear(84, 10))
 
 lr, num_epochs, batch_size = 1.0, 10, 256
-train_iter, test_iter = myLoadDataSet.my_load_data_fashion_mnist(batch_size)
+train_iter, test_iter = myLoadDataSetFashionMnist.my_load_data_fashion_mnist(batch_size)
 Train.train_ch6(net, train_iter, test_iter, num_epochs, lr, mytools.try_gpu())
 plt.show()
 # loss 0.216, train acc 0.919, test acc 0.809

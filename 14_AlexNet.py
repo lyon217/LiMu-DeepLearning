@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 import mytools
-from mytools import myLoadDataSet
+from mytools.loaddataset import myLoadDataSetFashionMnist
 from d2l import torch as d2l
 
 from mytools import Train
@@ -42,7 +42,7 @@ for layer in net:
     print(layer.__class__.__name__, 'output shape: \t ', X.shape)
 
 batch_size = 128
-train_iter, test_iter = myLoadDataSet.my_load_data_fashion_mnist(batch_size=batch_size, resize=224)
+train_iter, test_iter = myLoadDataSetFashionMnist.my_load_data_fashion_mnist(batch_size=batch_size, resize=224)
 
 lr, num_epochs = 0.9, 3
 Train.train_ch6(net, train_iter, test_iter, num_epochs, lr, mytools.try_gpu())

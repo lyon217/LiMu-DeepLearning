@@ -1,9 +1,6 @@
 import torch
 from torch import nn
-from torchvision import transforms
-import torchvision
-from torch.utils import data
-from mytools import myLoadDataSet
+from mytools.loaddataset import myLoadDataSetFashionMnist
 from d2l import torch as d2l
 
 from mytools import Accumulator
@@ -34,7 +31,7 @@ for layer in net:
     print(layer.__class__.__name__, 'output shape:\t', X.shape)
 
 batch_size = 256
-train_iter, test_iter = myLoadDataSet.my_load_data_fashion_mnist(batch_size=batch_size)
+train_iter, test_iter = myLoadDataSetFashionMnist.my_load_data_fashion_mnist(batch_size=batch_size)
 
 
 def evaluate_accuracy_gpu(net, data_iter, device=None):

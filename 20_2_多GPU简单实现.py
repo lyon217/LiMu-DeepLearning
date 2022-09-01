@@ -4,7 +4,6 @@ from torch.nn import functional as F
 from d2l import torch as d2l
 
 import mytools
-from mytools import Train, myLoadDataSet
 
 # 初始化模型参数
 scale = 0.01

@@ -2,7 +2,8 @@ import torch
 from torch import nn
 from d2l import torch as d2l
 import mytools
-from mytools import myLoadDataSet, Train
+from mytools.loaddataset import myLoadDataSetFashionMnist
+from mytools import Train
 
 
 def nin_block(in_channel, out_channel, kernel_size, padding, strides):
@@ -40,6 +41,6 @@ for layer in net:
     print(layer.__class__.__name__, 'output shape: \t', X.shape)
 
 lr, num_epochs, batch_size = 0.1, 10, 128
-train_iter, test_iter = myLoadDataSet.my_load_data_fashion_mnist(batch_size, 224)
+train_iter, test_iter = myLoadDataSetFashionMnist.my_load_data_fashion_mnist(batch_size, 224)
 Train.train_ch6(net, train_iter, test_iter, num_epochs, lr, mytools.try_gpu())
 d2l.plt.show()

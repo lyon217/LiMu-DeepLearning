@@ -1,7 +1,8 @@
 import torch
 from torch import nn
 import mytools
-from mytools import myLoadDataSet, Train
+from mytools.loaddataset import myLoadDataSetFashionMnist
+from mytools import Train
 from d2l import torch as d2l
 
 
@@ -56,7 +57,7 @@ small_conv_arch = [(pair[0], pair[1] // ratio) for pair in conv_arch]
 net = VGG(small_conv_arch)
 
 lr, num_epochs, batch_size = 0.05, 10, 128
-train_iter, test_iter = myLoadDataSet.my_load_data_fashion_mnist(batch_size, resize=224)
+train_iter, test_iter = myLoadDataSetFashionMnist.my_load_data_fashion_mnist(batch_size, resize=224)
 
 Train.train_ch6(net, train_iter, test_iter, num_epochs, lr, mytools.try_gpu())
 d2l.plt.show()
