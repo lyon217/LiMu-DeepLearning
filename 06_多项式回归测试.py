@@ -3,22 +3,21 @@ import numpy as np
 import torch
 from torch import nn
 from d2l import torch as d2l
+from mytools import Animator
 
 max_degree = 20  # 多项式最大阶数
-n_train, n_test = 100  # 训练和测试数据集大小
+n_train, n_test = 100, 100  # 训练和测试数据集大小
 true_w = np.zeros(max_degree)  # 分配大量的空间
 true_w[0:4] = np.array([5, 1.2, -3.4, 5.6])
 features = np.random.normal(size=(n_train + n_test, 1))
 np.random.shuffle(features)
-poly_features = np.power(features, np.arange(max_degree).reshape(1, -1)) # 200*200
+poly_features = np.power(features, np.arange(max_degree).reshape(1, -1))  # 200*200
 for i in range(max_degree):
     poly_features[:, i] /= math.gamma(i + 1)  # gamma(n)=(n-1)!
 
 # labels的维度：（n_train + n_test）
 labels = np.dot(poly_features, true_w)
 labels += np.random.normal(scale=0.1, size=labels.shape)
-
-
 
 # Numpy ndarray转化为tensor
 true_w, features, poly_features, labels = [torch.tensor(x, dtype=torch.float32)
@@ -63,7 +62,7 @@ def train(train_features, test_features, train_labels, test_labels, num_epochs=4
     train_iter = d2l.load_array((train_features, train_labels.reshape(-1, 1)), batch_size)
     test_iter = d2l.load_array((test_features, test_labels.reshape(-1, 1)), batch_size, is_train=False)
     trainer = torch.optim.SGD(net.parameters(), lr=0.01)
-    animator = d2l.Animator(xlabel='epoch', ylabel='loss', yscale='log',
+    animator = Animator.Animator(xlabel='epoch', ylabel='loss', yscale='log',
                             xlim=[1, num_epochs], ylim=[1e-3, 1e2], legend=['train', 'test'])
     for epoch in range(num_epochs):
         d2l.train_epoch_ch3(net, train_iter, loss, trainer)
